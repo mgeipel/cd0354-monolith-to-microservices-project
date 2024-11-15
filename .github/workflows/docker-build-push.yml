@@ -22,9 +22,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     # Step 3: Build the Docker image
-    - name: Build Docker image
-      run: docker build -t mgeipel/reverseproxy:latest .
+    - name: Build Docker image reverseproxy
+      run: docker build -t mgeipel/reverseproxy:latest -f udagram-reverseproxy/Dockerfile .
 
     # Step 4: Push the Docker image to the registry
-    - name: Push Docker image
+    - name: Push Docker image reverseproxy
       run: docker push mgeipel/reverseproxy:latest
