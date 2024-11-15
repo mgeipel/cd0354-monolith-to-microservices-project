@@ -23,7 +23,8 @@ jobs:
 
     # Step 3: Build the Docker image
     - name: Build Docker image reverseproxy
-      run: docker build -t mgeipel/reverseproxy:latest -f udagram-reverseproxy/Dockerfile .
+      working-directory: ./udagram-reverseproxy
+      run: docker build -t mgeipel/reverseproxy:latest  .
 
     # Step 4: Push the Docker image to the registry
     - name: Push Docker image reverseproxy
