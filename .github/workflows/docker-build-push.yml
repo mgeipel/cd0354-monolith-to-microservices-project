@@ -10,22 +10,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Check out the repository
+    # Check out the repository
     - name: Checkout Repo
       uses: actions/checkout@v3
 
-    # Step 2: Log in to Docker Hub or your preferred container registry
+    # Log in to Docker Hub or your preferred container registry
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ vars.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    # Step 3: Build the Docker image
+    # Build the Docker images
     - name: Build Docker image reverseproxy
       working-directory: ./udagram-reverseproxy
       run: docker build -t mgeipel/reverseproxy:latest  .
 
-    # Step 4: Push the Docker image to the registry
+    - name: Build Docker image udagram-api-user
+      working-directory: ./udagram-api-user
+      run: docker build -t mgeipel/udagram-api-user:latest  .
+
+    - name: Build Docker image udagram-api-feed
+      working-directory: ./udagram-api-feed
+      run: docker build -t mgeipel/udagram-api-feed:latest  .
+
+    - name: Build Docker image udagram-frontend
+      working-directory: ./udagram-frontend
+      run: docker build -t mgeipel/udagram-frontend:latest  .
+
+    # Push the Docker images to the registry
     - name: Push Docker image reverseproxy
       run: docker push mgeipel/reverseproxy:latest
+
+    - name: Push Docker image udagram-api-user
+      run: docker push mgeipel/udagram-api-user:latest
+
+    - name: Push Docker image udagram-api-feed
+      run: docker push mgeipel/udagram-api-feed:latest
+    
+    - name: Push Docker image udagram-frontend
+      run: docker push mgeipel/udagram-frontend:latest
+    
+
+    
